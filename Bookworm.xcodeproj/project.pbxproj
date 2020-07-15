@@ -58,11 +58,10 @@
 		1B6C6F1424BEFEAF00B4D4AD /* Bookworm */ = {
 			isa = PBXGroup;
 			children = (
-				1B6C6F1524BEFEAF00B4D4AD /* AppDelegate.swift */,
-				1B6C6F1724BEFEAF00B4D4AD /* SceneDelegate.swift */,
-				1B6C6F1C24BEFEAF00B4D4AD /* ContentView.swift */,
+				1B6C6F2E24BEFFB000B4D4AD /* Models */,
+				1B6C6F2C24BEFF0B00B4D4AD /* Views */,
+				1B6C6F2D24BEFF5F00B4D4AD /* Controllers */,
 				1B6C6F1E24BEFEB100B4D4AD /* Assets.xcassets */,
-				1B6C6F2324BEFEB100B4D4AD /* LaunchScreen.storyboard */,
 				1B6C6F2624BEFEB100B4D4AD /* Info.plist */,
 				1B6C6F1924BEFEAF00B4D4AD /* Bookworm.xcdatamodeld */,
 				1B6C6F2024BEFEB100B4D4AD /* Preview Content */,
@@ -76,6 +75,31 @@
 				1B6C6F2124BEFEB100B4D4AD /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1B6C6F2C24BEFF0B00B4D4AD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1B6C6F1C24BEFEAF00B4D4AD /* ContentView.swift */,
+				1B6C6F2324BEFEB100B4D4AD /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1B6C6F2D24BEFF5F00B4D4AD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1B6C6F1524BEFEAF00B4D4AD /* AppDelegate.swift */,
+				1B6C6F1724BEFEAF00B4D4AD /* SceneDelegate.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1B6C6F2E24BEFFB000B4D4AD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
