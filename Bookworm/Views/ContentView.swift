@@ -18,24 +18,31 @@ struct ContentView: View {
   
   var body: some View {
     NavigationView {
-//      Text("Count: \(books.count)")
+      if books.count == 0 { Text("Count: \(books.count)") } else {
       List {
         ForEach(books, id: \.self) { book in
           BookRow(title: book.title, rating: book.rating, author: book.author)
         }
       }
       .navigationBarTitle(Text("Bookworm"))
-      .navigationBarItems(trailing:
-                            Button(action: {
-                              self.showingAddBookView.toggle()
-                            }, label: {
-                              Image(systemName: "plus")
-                            })
+      .navigationBarItems(
+        leading:
+          EditButton()
+        ,
+        trailing:
+          Button(
+            action: {
+              self.showingAddBookView.toggle()
+            },
+            label: {
+              Image(systemName: "plus")
+            }
+          )
       )
       .sheet(isPresented: $showingAddBookView) {
         AddBookView().environment(\.managedObjectContext, self.moc)
       }
-    }
+      }}
   }
   
   struct BookRow: View {
