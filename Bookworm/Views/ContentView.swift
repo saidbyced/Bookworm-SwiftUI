@@ -26,9 +26,6 @@ struct ContentView: View {
       }
       .navigationBarTitle(Text("Bookworm"))
       .navigationBarItems(
-        leading:
-          EditButton()
-        ,
         trailing:
           Button(
             action: {
