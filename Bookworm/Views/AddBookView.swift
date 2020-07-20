@@ -66,7 +66,7 @@ struct AddBookView: View {
             
             self.presentationMode.wrappedValue.dismiss()
           }
-          //        .disabled(someFieldsEmpty)
+          .disabled(someFieldsEmpty)
         }
       }
       .navigationBarTitle("Add Book")
