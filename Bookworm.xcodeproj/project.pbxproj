@@ -87,9 +87,9 @@
 			isa = PBXGroup;
 			children = (
 				1B6C6F1C24BEFEAF00B4D4AD /* ContentView.swift */,
+				1B741ADF24C5B113008368C2 /* AddBookView.swift */,
 				1B7359BA24C5DF9C00A619BF /* RatingView.swift */,
 				1B6C6F2324BEFEB100B4D4AD /* LaunchScreen.storyboard */,
-				1B741ADF24C5B113008368C2 /* AddBookView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
