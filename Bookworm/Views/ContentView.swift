@@ -21,7 +21,7 @@ struct ContentView: View {
       if books.count == 0 { Text("Count: \(books.count)") } else {
       List {
         ForEach(books, id: \.self) { book in
-          BookRow(title: book.title, rating: book.rating, author: book.author)
+          BookRowFor(book)
         }
       }
       .navigationBarTitle(Text("Bookworm"))
@@ -42,14 +42,15 @@ struct ContentView: View {
       }}
   }
   
-  struct BookRow: View {
+  struct BookRowFor: View {
+    let book: Book
     let title: String?
     let rating: Int16
     let author: String?
     
     var body: some View {
       NavigationLink(
-        destination: Text(title ?? "Unknown title"),
+        destination: BookDetailView(book: book),
         label: {
           EmojiRatingView(rating: rating)
             .font(.largeTitle)
@@ -61,6 +62,13 @@ struct ContentView: View {
           }
         }
       )
+    }
+    
+    init(_ book: Book) {
+      self.book = book
+      self.title = book.title
+      self.rating = book.rating
+      self.author = book.author
     }
   }
 }
