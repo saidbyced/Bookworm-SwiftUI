@@ -14,26 +14,55 @@ struct ContentView: View {
   
   @State private var showingAddBookView = false
   
-    var body: some View {
-      NavigationView {
-        Text("Count: \(books.count)")
-          .navigationBarTitle(Text("Bookworm"))
-          .navigationBarItems(trailing:
-            Button(action: {
-              self.showingAddBookView.toggle()
-            }, label: {
-              Image(systemName: "plus")
-            })
-          )
-          .sheet(isPresented: $showingAddBookView) {
-            AddBookView().environment(\.managedObjectContext, self.moc)
+  var unknown = "Unknown "
+  
+  var body: some View {
+    NavigationView {
+//      Text("Count: \(books.count)")
+      List {
+        ForEach(books, id: \.self) { book in
+          BookRow(title: book.title, rating: book.rating, author: book.author)
         }
       }
+      .navigationBarTitle(Text("Bookworm"))
+      .navigationBarItems(trailing:
+                            Button(action: {
+                              self.showingAddBookView.toggle()
+                            }, label: {
+                              Image(systemName: "plus")
+                            })
+      )
+      .sheet(isPresented: $showingAddBookView) {
+        AddBookView().environment(\.managedObjectContext, self.moc)
+      }
     }
+  }
+  
+  struct BookRow: View {
+    let title: String?
+    let rating: Int16
+    let author: String?
+    
+    var body: some View {
+      NavigationLink(
+        destination: Text(title ?? "Unknown title"),
+        label: {
+          EmojiRatingView(rating: rating)
+            .font(.largeTitle)
+          VStack(alignment: .leading) {
+            Text(title ?? "Unknown title")
+              .font(.headline)
+            Text(author ?? "Unknown author")
+              .foregroundColor(.secondary)
+          }
+        }
+      )
+    }
+  }
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+  static var previews: some View {
+    ContentView()
+  }
 }
