@@ -9,6 +9,9 @@ import SwiftUI
 import CoreData
 
 struct BookDetailView: View {
+  @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
+  @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+  
   let book: Book
   
   var body: some View {

@@ -10,54 +10,49 @@ import SwiftUI
 struct ContentView: View {
   @Environment(\.managedObjectContext) var moc
   
-  @FetchRequest(entity: Book.entity(), sortDescriptors: []) var books: FetchedResults<Book>
+  @FetchRequest(entity: Book.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Book.rating, ascending: true), NSSortDescriptor(keyPath: \Book.title, ascending: true), NSSortDescriptor(keyPath: \Book.author, ascending: true)]) var books: FetchedResults<Book>
   
   @State private var showingAddBookView = false
   
-  var unknown = "Unknown "
-  
   var body: some View {
     NavigationView {
-      if books.count == 0 {
-        Text("Count: \(books.count)")
-          .navigationBarTitle(Text("Bookworm"))
-          .navigationBarItems(
-            trailing:
-              Button(
-                action: {
-                  self.showingAddBookView.toggle()
-                },
-                label: {
-                  Image(systemName: "plus")
-                }
-              )
-          )
-          .sheet(isPresented: $showingAddBookView) {
-            AddBookView().environment(\.managedObjectContext, self.moc)
-          }
-      } else {
-        List {
-          ForEach(books, id: \.self) { book in
-            BookRowFor(book)
-          }
+      List {
+        ForEach(books, id: \.self) { book in
+          BookRowFor(book)
         }
-        .navigationBarTitle(Text("Bookworm"))
-        .navigationBarItems(
-          trailing:
-            Button(
-              action: {
-                self.showingAddBookView.toggle()
-              },
-              label: {
-                Image(systemName: "plus")
-              }
-            )
-        )
-        .sheet(isPresented: $showingAddBookView) {
-          AddBookView().environment(\.managedObjectContext, self.moc)
+        .onDelete { indexSet in
+          deleteBooks(at: indexSet)
         }
       }
+      .navigationBarTitle(Text("Bookworm"))
+      .navigationBarItems(
+        leading:
+          EditButton()
+        ,
+        trailing:
+          Button(
+            action: {
+              self.showingAddBookView.toggle()
+            },
+            label: {
+              Image(systemName: "plus")
+            }
+          )
+      )
+      .sheet(isPresented: $showingAddBookView) {
+        AddBookView().environment(\.managedObjectContext, self.moc)
+      }
     }
+  }
+  
+  func deleteBooks(at offsets: IndexSet) {
+    for offset in offsets {
+      let book = books[offset]
+      
+      moc.delete(book)
+    }
+    
+    try? moc.save()
   }
   
   struct BookRowFor: View {
@@ -90,6 +85,7 @@ struct ContentView: View {
     }
   }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
