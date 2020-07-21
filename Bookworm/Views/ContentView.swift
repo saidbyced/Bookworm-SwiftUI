@@ -18,7 +18,7 @@ struct ContentView: View {
     NavigationView {
       List {
         ForEach(books, id: \.self) { book in
-          BookRowFor(book)
+          BookRow(for: book)
         }
         .onDelete { indexSet in
           deleteBooks(at: indexSet)
@@ -55,7 +55,7 @@ struct ContentView: View {
     try? moc.save()
   }
   
-  struct BookRowFor: View {
+  struct BookRow: View {
     let book: Book
     let title: String?
     let rating: Int16
@@ -79,7 +79,7 @@ struct ContentView: View {
       )
     }
     
-    init(_ book: Book) {
+    init(for book: Book) {
       self.book = book
       self.title = book.title
       self.rating = book.rating
