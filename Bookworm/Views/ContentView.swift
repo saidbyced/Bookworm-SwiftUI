@@ -65,14 +65,16 @@ struct ContentView: View {
       NavigationLink(
         destination: BookDetailView(book: book),
         label: {
-          EmojiRatingView(rating: rating)
-            .font(.largeTitle)
           VStack(alignment: .leading) {
             Text(title ?? "Unknown title")
               .font(.headline)
             Text(author ?? "Unknown author")
               .foregroundColor(.secondary)
           }
+          Spacer()
+          EmojiRatingView(rating: rating)
+            .font(.largeTitle)
+            .padding(.horizontal, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
         }
       )
     }
