@@ -18,9 +18,14 @@ struct BookDetailView: View {
     GeometryReader { geometry in
       ScrollView {
         VStack {
+          Text(self.book.title ?? "Unknown title")
+            .font(.largeTitle)
+            .fontWeight(.bold)
+          Text("by \(self.book.author ?? "Unknown author")")
+            .font(.title2)
           ZStack(alignment: .bottomTrailing) {
             Image(self.book.genre ?? "FANTASY")
-            Text(self.book.genre?.uppercased() ?? "FANTASY")
+            Text(self.book.genre?.uppercased() ?? "Unknown")
               .font(.caption)
               .fontWeight(.black)
               .padding(8)
@@ -30,17 +35,15 @@ struct BookDetailView: View {
               .offset(x: -5, y: -5)
           }
             .frame(maxWidth: geometry.size.width)
-          Text(self.book.author ?? "Unknown author")
-            .font(.title)
           RatingView(rating: .constant(Int(self.book.rating)))
             .font(.largeTitle)
-          Text(self.book.review ?? "No review")
             .padding()
+          Text(self.book.review ?? "No review")
+            .padding(.horizontal, 10)
           Spacer()
         }
       }
     }
-    .navigationBarTitle(Text(book.title ?? "Unknown book")/*, displayMode: .inline*/)
   }
 }
 
