@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  BookListView.swift
 //  Bookworm
 //
 //  Created by Chris Eadie on 15/07/2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct BookListView: View {
   @Environment(\.managedObjectContext) var moc
   
   @FetchRequest(entity: Book.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Book.rating, ascending: true), NSSortDescriptor(keyPath: \Book.title, ascending: true), NSSortDescriptor(keyPath: \Book.author, ascending: true)]) var books: FetchedResults<Book>
@@ -89,6 +89,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    BookListView()
   }
 }
