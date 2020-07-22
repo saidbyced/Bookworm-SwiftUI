@@ -45,16 +45,6 @@ struct ContentView: View {
     }
   }
   
-  func deleteBooks(at offsets: IndexSet) {
-    for offset in offsets {
-      let book = books[offset]
-      
-      moc.delete(book)
-    }
-    
-    try? moc.save()
-  }
-  
   struct BookRow: View {
     let book: Book
     let title: String?
@@ -65,16 +55,14 @@ struct ContentView: View {
       NavigationLink(
         destination: BookDetailView(book: book),
         label: {
+          EmojiRatingView(rating: rating)
+            .font(.largeTitle)
           VStack(alignment: .leading) {
             Text(title ?? "Unknown title")
               .font(.headline)
             Text(author ?? "Unknown author")
               .foregroundColor(.secondary)
           }
-          Spacer()
-          EmojiRatingView(rating: rating)
-            .font(.largeTitle)
-            .padding(.horizontal, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
         }
       )
     }
@@ -85,6 +73,16 @@ struct ContentView: View {
       self.rating = book.rating
       self.author = book.author
     }
+  }
+  
+  func deleteBooks(at offsets: IndexSet) {
+    for offset in offsets {
+      let book = books[offset]
+      
+      moc.delete(book)
+    }
+    
+    try? moc.save()
   }
 }
 
